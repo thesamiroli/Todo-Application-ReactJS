@@ -1,0 +1,10 @@
+.list-item{
+   padding: 20px;
+   background-color: aqua;
+   margin: 2px 0;
+   width: 100%;
+}
+
+.list-item.checked{
+    text-decoration: line-through;
+}

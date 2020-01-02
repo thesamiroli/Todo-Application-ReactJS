@@ -1,0 +1,18 @@
+.button{
+    color: black;
+    padding : 20px;
+    border-radius: 5px 5px;
+    box-shadow: none;
+    width: 150px;
+    font-size: medium;
+}
+
+.button.green{
+    color: white;
+    background-color: #65D060;
+}
+
+.button.red{
+    color: white;
+    background-color: red;
+}

@@ -1,0 +1,14 @@
+.tab{
+    padding: 50px;
+    text-align: center;
+    background-color: green;
+    display: inline-block;
+}
+
+.tab:hover{
+    cursor: pointer;
+}
+
+.tab.selected{
+    border-bottom: 5px solid red;
+}
