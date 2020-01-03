@@ -42,7 +42,7 @@ class App extends Component {
   };
 
   onEnter = event => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && event.target.value) {
       event.preventDefault();
       let val = this.items;
       val.push({ title: event.target.value, checked: false });
@@ -62,11 +62,11 @@ class App extends Component {
   };
 
   tabClickedHandler(value, index){
-    if(value == "All"){
+    if(value === "All"){
       this.setState({todos : this.items, selected : [true, false, false]})
     }
 
-    if(value == "Completed"){
+    if(value === "Completed"){
       let displayItems = this.state.todos.map((item => {
         return(
           item.checked ? item : "nothing"
@@ -75,7 +75,7 @@ class App extends Component {
       this.setState({todos : displayItems, selected : [false, true, false]})
     }
 
-    if(value == "Remaining"){
+    if(value === "Remaining"){
       let displayItems = this.state.todos.map((item => {
         return(
           !item.checked ? item : "nothing"
@@ -89,6 +89,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <div className="tabs-wrapper">
         {this.tabList.map((value, index) => {
             return (
               <Tab selected={this.state.selected[index]} tabName={value} onClick={(event) => {
@@ -97,6 +98,7 @@ class App extends Component {
             )
         })
       }
+       </div>
 
         <Search value={this.state.searchTerm} onChange={this.onSearch} />
         <AddItem
