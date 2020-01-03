@@ -7,16 +7,15 @@ import Tab from "./components/Header/Tab";
 import emptyList from "./assets/images/emptyList.png"
 
 class App extends Component {
-  tabList = ["All", "Completed", "Remaining"];
   constructor() {
     super();
     this.items = [
       {
         title: "Samir",
-        checked: false
+        checked: true
       },
       {
-        title: "Ninja",
+        title: "Hero",
         checked: false
       },
       {
@@ -106,6 +105,7 @@ class App extends Component {
     return (
       <div className="main">
         <div className="header-wrapper">
+
           {this.state.tabs.map((value, index) => {
             return (
               <Tab
@@ -135,7 +135,6 @@ class App extends Component {
                   onItemClicked={event => {
                     let val = this.state.todos;
                     val[index].checked = !val[index].checked;
-                    console.log(this.items);
                     this.setState({ todos: val });
                   }}
                   index={index}

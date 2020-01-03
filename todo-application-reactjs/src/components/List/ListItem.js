@@ -7,7 +7,7 @@ export class ListItem extends Component {
     let statusIcon = this.props.checked ? (
       <i className="fas fa-check-circle"></i>
     ) : (
-        <i class="far fa-circle"></i>
+        <i className="far fa-circle"></i>
     );
 
     return (
