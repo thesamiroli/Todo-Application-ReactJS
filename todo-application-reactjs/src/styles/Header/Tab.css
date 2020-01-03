@@ -1,7 +1,9 @@
 .tab{
-    padding: 50px;
+    padding: 20px;
     text-align: center;
     display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700; 
 }
 
 .tab:hover{

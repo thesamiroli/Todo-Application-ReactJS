@@ -4,9 +4,22 @@
     box-sizing: border-box;
 }
 
-.tabs-wrapper{
+.main {
+    background-color:  gray;
+}
+
+.header-wrapper{
     color: white;
     margin: 0 auto;
     background-color:  #65D060;
+    text-align: center;
+}
+
+.body-wrapper{
+    background-color: #8785A0;
+    padding-bottom: 4px;
+}
+
+.empty-list{
     text-align: center;
 }

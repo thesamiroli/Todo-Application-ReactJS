@@ -10,7 +10,7 @@ class Search extends Component {
             type="text"
             onChange={this.props.onChange}
             className="search-input"
-            placeholder="Enter your search Item"
+            placeholder="Enter your search item..."
             value={this.props.searchTerm}
           ></input>
         </form>
