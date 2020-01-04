@@ -4,8 +4,7 @@ import "../../styles/List/AddItem.css";
 export class AddItem extends Component {
   render() {
     return (
-      <div>
-        <form>
+      <div className="add-wrapper">
           <input
             type="text"
             className="add-item"
@@ -14,7 +13,7 @@ export class AddItem extends Component {
             onChange={this.props.onChange}
             onKeyDown={this.props.onEnter}
           ></input>
-        </form>
+          <i className="fas fa-plus-circle add-icon"></i>
       </div>
     );
   }

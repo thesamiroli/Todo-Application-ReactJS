@@ -2,12 +2,15 @@
     padding: 20px;
     text-align: center;
     display: inline-block;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Archivo', sans-serif;
+    font-size: 20px;
     font-weight: 700; 
+    border-radius: 4px;
 }
 
 .tab:hover{
     cursor: pointer;
+    background-color: #65D060;
 }
 
 .tab.selected{

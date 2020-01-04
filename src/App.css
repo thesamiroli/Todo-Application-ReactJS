@@ -11,13 +11,18 @@
 .header-wrapper{
     color: white;
     margin: 0 auto;
-    background-color:  #65D060;
+    background-color:  #4696e5;
     text-align: center;
 }
 
+.logo-search-wrapper{
+    display: flex
+}
+
 .body-wrapper{
-    background-color: #8785A0;
+    background-color: #f5f5f5;
     padding-bottom: 4px;
+    text-align: center;
 }
 
 .empty-list{

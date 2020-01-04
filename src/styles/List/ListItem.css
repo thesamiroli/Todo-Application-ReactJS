@@ -4,12 +4,19 @@
    margin: 2px 0px;
    margin-left: 200px;
    width: 75%;
-   font-family: 'Roboto', sans-serif;
+   font-family: 'Archivo', sans-serif;
+   font-size: 18px;
    font-weight: 700;   
+   text-align: left;
+   border-radius: 4px;
 }
 
 .list-item.checked{
     text-decoration: line-through;
+}
+
+.list-item:hover {
+    cursor: pointer;
 }
 
 .tick{

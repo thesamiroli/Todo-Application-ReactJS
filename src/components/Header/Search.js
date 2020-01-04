@@ -4,8 +4,7 @@ import "../../styles/Header/Search.css";
 class Search extends Component {
   render() {
     return (
-      <div>
-        <form>
+      <div className="search-wrapper">
           <input
             type="text"
             onChange={this.props.onChange}
@@ -13,7 +12,6 @@ class Search extends Component {
             placeholder="Enter your search item..."
             value={this.props.searchTerm}
           ></input>
-        </form>
       </div>
     );
   }

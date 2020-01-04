@@ -4,6 +4,7 @@ import "./App.css";
 import AddItem from "./components/List/AddItem";
 import Search from "./components/Header/Search";
 import Tab from "./components/Header/Tab";
+import Logo from "./components/Header/Logo";
 import emptyList from "./assets/images/emptyList.png";
 
 class App extends Component {
@@ -82,7 +83,7 @@ class App extends Component {
 
     if (this.state.searchTerm != "") {
       let searchedItems = tempItems.filter(item =>
-        item.title.toLowerCase().includes(this.state.searchTerm)
+        item.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
       );
       return searchedItems;
     }
@@ -114,31 +115,41 @@ class App extends Component {
     return (
       <div className="main">
         <div className="header-wrapper">
-          {this.state.tabs.map((value, index) => {
-            return (
-              <Tab
-                selected={value.selected}
-                tabName={value.title}
-                onClick={event => {
-                  this.tabClickedHandler(value, index);
-                }}
-              />
-            );
-          })}
-
-          <Search
-            value={this.state.searchTerm}
-            onChange={event =>
-              this.setState({ searchTerm: event.target.value })
-            }
-          />
+          <div className="logo-search-wrapper">
+            {/* For Displaying Logo and  Search */}
+            <Logo />
+            <Search
+              value={this.state.searchTerm}
+              onChange={event =>
+                this.setState({ searchTerm: event.target.value })
+              }
+            />
+          </div>
+          {/* For Displaying Tabs */}
+          <div className="tab-wrapper">
+            {this.state.tabs.map((value, index) => {
+              return (
+                <Tab
+                  selected={value.selected}
+                  tabName={value.title}
+                  onClick={event => {
+                    this.tabClickedHandler(value, index);
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="body-wrapper">
+          {/* For Displaying Add Item */}
           <AddItem
             onEnter={this.onEnter}
             onChange={event => this.setState({ inputTerm: event.target.value })}
             value={this.state.inputTerm}
           />
+
+          {/* For Displaying Todos */}
+
           {itemsToDisplay.length > 0 ? (
             itemsToDisplay.map((value, index) => {
               return (

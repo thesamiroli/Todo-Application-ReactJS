@@ -1,6 +1,18 @@
+.add-icon {
+    box-sizing: border-box;
+    margin : 10px 10px;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+}
+.add-icon:hover{
+    cursor: pointer;
+}
+
 .add-item{
-    width: 75%;
-    margin: 20px 200px;
+    width: 72%;
+    height: 50px;
+    margin: 10px 0px 10px 60px;
     padding: 1% 2%;
     display: inline-block;
     border: 1px solid #ccc;
