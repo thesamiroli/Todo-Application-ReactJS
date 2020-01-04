@@ -4,28 +4,30 @@ import "./App.css";
 import AddItem from "./components/List/AddItem";
 import Search from "./components/Header/Search";
 import Tab from "./components/Header/Tab";
-import emptyList from "./assets/images/emptyList.png"
+import emptyList from "./assets/images/emptyList.png";
 
 class App extends Component {
   constructor() {
     super();
-    this.items = [
-      {
-        title: "Samir",
-        checked: true
-      },
-      {
-        title: "Hero",
-        checked: false
-      },
-      {
-        title: "Don",
-        checked: false
-      }
-    ];
     this.state = {
-      currentTab: 0,
-      todos: this.items,
+      currentTab: "All",
+      todos: [
+        {
+          id: 0,
+          title: "Breakfast",
+          checked: true
+        },
+        {
+          id: 1,
+          title: "Lunch",
+          checked: false
+        },
+        {
+          id: 2,
+          title: "Dinner",
+          checked: false
+        }
+      ],
       inputTerm: "",
       searchTerm: "",
       tabs: [
@@ -45,10 +47,6 @@ class App extends Component {
     };
   }
 
-  onItemClicked = event => {
-    console.log(event.target);
-  };
-
   onInputChange = event => {
     this.setState({ inputTerm: event.target.value });
   };
@@ -57,22 +55,41 @@ class App extends Component {
     if (event.keyCode === 13 && event.target.value) {
       event.preventDefault();
       let updatedTabs = this.updateTabs(0);
-      let val = this.items;
-      val.push({ title: event.target.value, checked: false });
-      this.setState({ inputTerm: "", todos: val, tabs: updatedTabs });
+      let val = this.state.todos;
+      val.push({
+        id: this.state.length,
+        title: event.target.value,
+        checked: false
+      });
+      this.setState({
+        inputTerm: "",
+        todos: val,
+        tabs: updatedTabs,
+        filteredItems: val
+      });
     }
   };
 
-  onSearch = event => {
-    let displayItems = this.items.filter(item =>
-      item.title.toLowerCase().includes(event.target.value)
-    );
-    console.log(displayItems);
-    this.setState({ todos: displayItems });
-  };
+  getItemsToDisplay(tab) {
+    let tempItems = "";
+    if (tab === "All") {
+      tempItems = this.state.todos.filter(item => true);
+    } else if (tab === "Completed") {
+      tempItems = this.state.todos.filter(item => item.checked);
+    } else if (tab === "Remaining") {
+      tempItems = this.state.todos.filter(item => !item.checked);
+    }
+
+    if (this.state.searchTerm != "") {
+      let searchedItems = tempItems.filter(item =>
+        item.title.toLowerCase().includes(this.state.searchTerm)
+      );
+      return searchedItems;
+    }
+    return tempItems;
+  }
 
   updateTabs = index => {
-    console.log(index);
     let tempTabs = this.state.tabs;
     for (let i = 0; i < tempTabs.length; i++) {
       tempTabs[i].selected = false;
@@ -84,28 +101,19 @@ class App extends Component {
   };
 
   tabClickedHandler(value, index) {
-    if (value.title === "All") {
-      let updatedTabs = this.updateTabs(index);
-      this.setState({ todos: this.items, tabs: updatedTabs });
-    }
-
-    if (value.title === "Completed") {
-      let updatedTabs = this.updateTabs(index);
-      let displayItems = this.items.filter(item => item.checked);
-      this.setState({ todos: displayItems, tabs: updatedTabs });
-    }
-
-    if (value.title === "Remaining") {
-      let updatedTabs = this.updateTabs(index);
-      let displayItems = this.items.filter(item => !item.checked);
-      this.setState({ todos: displayItems, tabs: updatedTabs });
-    }
+    let updatedTabs = this.updateTabs(index);
+    this.setState({
+      tabs: updatedTabs,
+      currentTab: value.title,
+      inputTerm: ""
+    });
   }
+
   render() {
+    let itemsToDisplay = this.getItemsToDisplay(this.state.currentTab);
     return (
       <div className="main">
         <div className="header-wrapper">
-
           {this.state.tabs.map((value, index) => {
             return (
               <Tab
@@ -118,39 +126,45 @@ class App extends Component {
             );
           })}
 
-          <Search value={this.state.searchTerm} onChange={this.onSearch} />
+          <Search
+            value={this.state.searchTerm}
+            onChange={event =>
+              this.setState({ searchTerm: event.target.value })
+            }
+          />
         </div>
         <div className="body-wrapper">
           <AddItem
             onEnter={this.onEnter}
-            onChange={this.onInputChange}
+            onChange={event => this.setState({ inputTerm: event.target.value })}
             value={this.state.inputTerm}
           />
-          {
-          (this.state.todos.length) > 0 ?  
-          (this.state.todos.map((value, index) => {
-            return (
-              <div>
-                <ListItem
-                  onItemClicked={event => {
-                    let val = this.state.todos;
-                    val[index].checked = !val[index].checked;
-                    this.setState({ todos: val });
-                  }}
-                  index={index}
-                  itemTitle={value.title}
-                  checked={value.checked}
-                />
-              </div>
-            );
-          })) :(
+          {itemsToDisplay.length > 0 ? (
+            itemsToDisplay.map((value, index) => {
+              return (
+                <div>
+                  <ListItem
+                    onItemClicked={event => {
+                      let tempItems = this.state.todos;
+                      for (let i = 0; i < tempItems.length; i++) {
+                        if (tempItems[i].id == value.id) {
+                          tempItems[i].checked = !tempItems[i].checked;
+                        }
+                      }
+                      this.setState({ todos: tempItems });
+                    }}
+                    index={index}
+                    itemTitle={value.title}
+                    checked={value.checked}
+                  />
+                </div>
+              );
+            })
+          ) : (
             <div className="empty-list">
               <img src={emptyList} />
-              </div>
-          )
-          
-          }
-        
+            </div>
+          )}
         </div>
       </div>
     );
