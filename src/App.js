@@ -48,30 +48,47 @@ class App extends Component {
     };
   }
 
+  updateTabs = currentTab => {
+    let tempTabs = this.state.tabs;
+    for (let i = 0; i < tempTabs.length; i++) {
+      tempTabs[i].selected = false;
+      if (tempTabs[i].title == currentTab) {
+        tempTabs[i].selected = true;
+      }
+    }
+    return tempTabs;
+  };
+
   onInputChange = event => {
     this.setState({ inputTerm: event.target.value });
   };
 
-  onEnter = event => {
-    if (event.keyCode === 13 && event.target.value) {
-      event.preventDefault();
-      let updatedTabs = this.updateTabs(0);
+  addTodo = () => {
+    let todoItem = document.querySelector(".add-item").value;
+    if (todoItem != "") {
+      let updatedTabs = this.updateTabs(this.state.currentTab);
       let val = this.state.todos;
       val.push({
         id: this.state.length,
-        title: event.target.value,
+        title: todoItem,
         checked: false
       });
       this.setState({
         inputTerm: "",
         todos: val,
-        tabs: updatedTabs,
-        filteredItems: val
+        tabs: updatedTabs
       });
+    }
+  };
+  onEnter = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      this.addTodo();
     }
   };
 
   getItemsToDisplay(tab) {
+    console.log("Tab : ", tab);
     let tempItems = "";
     if (tab === "All") {
       tempItems = this.state.todos.filter(item => true);
@@ -90,19 +107,8 @@ class App extends Component {
     return tempItems;
   }
 
-  updateTabs = index => {
-    let tempTabs = this.state.tabs;
-    for (let i = 0; i < tempTabs.length; i++) {
-      tempTabs[i].selected = false;
-      if (i == index) {
-        tempTabs[i].selected = true;
-      }
-    }
-    return tempTabs;
-  };
-
   tabClickedHandler(value, index) {
-    let updatedTabs = this.updateTabs(index);
+    let updatedTabs = this.updateTabs(this.state.tabs[index].title);
     this.setState({
       tabs: updatedTabs,
       currentTab: value.title,
@@ -143,6 +149,7 @@ class App extends Component {
         <div className="body-wrapper">
           {/* For Displaying Add Item */}
           <AddItem
+            onIconClick={this.addTodo}
             onEnter={this.onEnter}
             onChange={event => this.setState({ inputTerm: event.target.value })}
             value={this.state.inputTerm}

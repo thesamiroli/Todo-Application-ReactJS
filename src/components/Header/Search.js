@@ -9,7 +9,7 @@ class Search extends Component {
             type="text"
             onChange={this.props.onChange}
             className="search-input"
-            placeholder="Enter your search item..."
+            placeholder="Search your todos..."
             value={this.props.searchTerm}
           ></input>
       </div>

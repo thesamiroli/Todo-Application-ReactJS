@@ -13,7 +13,7 @@ export class AddItem extends Component {
             onChange={this.props.onChange}
             onKeyDown={this.props.onEnter}
           ></input>
-          <i className="fas fa-plus-circle add-icon"></i>
+          <i className="fas fa-plus-circle add-icon" onClick={this.props.onIconClick}></i>
       </div>
     );
   }
