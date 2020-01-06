@@ -9,12 +9,15 @@ export class ListItem extends Component {
     ) : (
         <i className="far fa-circle"></i>
     );
-
+    let deleteIcon = <i className="fas fa-trash-alt delete-icon"></i>
     return (
-      <div className={status} onClick={this.props.onItemClicked}>  
+      <div className={status} >  
         {this.props.itemTitle}
-        <span className="tick">
+        <span className="tick" onClick={this.props.onItemClicked}>
         {statusIcon}
+        </span>
+        <span onClick={this.props.onDeleteIconClicked} className="tick">
+        {deleteIcon}
         </span>
       </div>
     );

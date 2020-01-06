@@ -12,23 +12,7 @@ class App extends Component {
     super();
     this.state = {
       currentTab: "All",
-      todos: [
-        {
-          id: 0,
-          title: "Breakfast",
-          checked: true
-        },
-        {
-          id: 1,
-          title: "Lunch",
-          checked: false
-        },
-        {
-          id: 2,
-          title: "Dinner",
-          checked: false
-        }
-      ],
+      todos: [],
       inputTerm: "",
       searchTerm: "",
       tabs: [
@@ -67,15 +51,16 @@ class App extends Component {
     let todoItem = document.querySelector(".add-item").value;
     if (todoItem != "") {
       let updatedTabs = this.updateTabs(this.state.currentTab);
-      let val = this.state.todos;
-      val.push({
-        id: this.state.length,
+
+      let tempTodo = {
+        id: this.state.todos.length,
         title: todoItem,
         checked: false
-      });
+      };
+
       this.setState({
         inputTerm: "",
-        todos: val,
+        todos: [...this.state.todos, tempTodo],
         tabs: updatedTabs
       });
     }
@@ -116,6 +101,26 @@ class App extends Component {
     });
   }
 
+  onItemClickedHandler(value, index) {
+    let tempItems = this.state.todos;
+    for (let i = 0; i < tempItems.length; i++) {
+      if (tempItems[i].id == value.id) {
+        tempItems[i].checked = !tempItems[i].checked;
+      }
+    }
+    this.setState({ todos: tempItems });
+  }
+
+  onDeleteIconClickedHandler(value, index) {
+    let tempItems = [];
+    for (let i = 0; i < this.state.todos.length; i++) {
+      if (index != i) {
+        tempItems.push(this.state.todos[i]);
+      }
+    }
+    this.setState({ todos: tempItems });
+  }
+
   render() {
     let itemsToDisplay = this.getItemsToDisplay(this.state.currentTab);
     return (
@@ -136,6 +141,7 @@ class App extends Component {
             {this.state.tabs.map((value, index) => {
               return (
                 <Tab
+                  key={index}
                   selected={value.selected}
                   tabName={value.title}
                   onClick={event => {
@@ -163,13 +169,10 @@ class App extends Component {
                 <div>
                   <ListItem
                     onItemClicked={event => {
-                      let tempItems = this.state.todos;
-                      for (let i = 0; i < tempItems.length; i++) {
-                        if (tempItems[i].id == value.id) {
-                          tempItems[i].checked = !tempItems[i].checked;
-                        }
-                      }
-                      this.setState({ todos: tempItems });
+                      this.onItemClickedHandler(value, index);
+                    }}
+                    onDeleteIconClicked={event => {
+                      this.onDeleteIconClickedHandler(value, index)
                     }}
                     index={index}
                     itemTitle={value.title}
@@ -183,6 +186,7 @@ class App extends Component {
               <img src={emptyList} />
             </div>
           )}
+          
         </div>
       </div>
     );

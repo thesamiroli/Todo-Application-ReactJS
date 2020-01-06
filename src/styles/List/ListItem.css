@@ -1,25 +1,29 @@
-.list-item{
-   padding: 20px;
-   background-color: white;
-   margin: 2px 0px;
-   margin-left: 200px;
-   width: 75%;
-   font-family: 'Archivo', sans-serif;
-   font-size: 18px;
-   font-weight: 700;   
-   text-align: left;
-   border-radius: 4px;
+.list-item {
+  padding: 20px;
+  background-color: white;
+  margin: 2px 0px;
+  margin-left: 200px;
+  width: 75%;
+  font-family: "Archivo", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  border-radius: 4px;
 }
 
-.list-item.checked{
-    text-decoration: line-through;
+.delete-icon {
+    margin: 0 10px;
+}
+
+.list-item.checked {
+  text-decoration: line-through;
 }
 
 .list-item:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.tick{
-    float: right;
-    font-size: larger;
+.tick {
+  float: right;
+  font-size: larger;
 }
