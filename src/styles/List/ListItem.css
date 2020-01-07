@@ -11,9 +11,7 @@
   border-radius: 4px;
 }
 
-.delete-icon {
-    margin: 0 10px;
-}
+
 
 .list-item.checked {
   text-decoration: line-through;
@@ -23,7 +21,15 @@
   cursor: pointer;
 }
 
-.tick {
-  float: right;
+.tick.check {
+  float: left;
   font-size: larger;
+  margin-right: 10px;
+}
+
+.delete-icon {
+  font-size: larger;
+  float: right;
+  color: red;
+  margin: 0 10px;
 }

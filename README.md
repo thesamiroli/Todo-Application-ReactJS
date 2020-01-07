@@ -1,5 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+Goto https://thesamiroli.github.io/Todo-Application-ReactJS/ to view the built project.
 ## Available Scripts
 
 In the project directory, you can run:

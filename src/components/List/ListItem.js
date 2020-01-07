@@ -13,7 +13,7 @@ export class ListItem extends Component {
     return (
       <div className={status} >  
         {this.props.itemTitle}
-        <span className="tick" onClick={this.props.onItemClicked}>
+        <span className="tick check" onClick={this.props.onItemClicked}>
         {statusIcon}
         </span>
         <span onClick={this.props.onDeleteIconClicked} className="tick">
